@@ -19,38 +19,31 @@ use mglaman\Toolstack\Stacks;
 class ToolstackTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testSingletonInstance()
-    {
-        $singleton = Toolstack::instance()->instance();
-        $this->assertInstanceOf('\mglaman\Toolstack\Toolstack', $singleton,
-          'Initiate toolstack singleton');
-    }
-
     /**
      * @covers \mglaman\Toolstack\Toolstack::loadStacks()
      */
     public function testGetStacks()
     {
-        $stacks = Toolstack::instance()->getStacks();
+        $stacks = Toolstack::getStacks();
         $this->assertNotEmpty($stacks, 'Toolstack returned array of stacks');
     }
 
     public function testGetStackByType()
     {
         // @todo this should probably be mocked for proper unit testing.
-        $stack = Toolstack::instance()->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
 
-        $stack = Toolstack::instance()->getStackByType('SomeRandomey');
+        $stack = Toolstack::getStackByType('SomeRandomey');
         $this->assertNull($stack);
     }
 
     public function testGetStackByDir()
     {
-        $stack = Toolstack::instance()->getStackByDir('tests/resources/composer');
+        $stack = Toolstack::getStackByDir('tests/resources/composer');
         $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
 
-        $stack = Toolstack::instance()->getStackByDir('tests/resources/empty');
+        $stack = Toolstack::getStackByDir('tests/resources/empty');
         $this->assertNull($stack);
     }
 
@@ -59,12 +52,12 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
      */
     public function testInspectBadDir()
     {
-        Toolstack::instance()->inspect('invalid/directory');
+        Toolstack::inspect('invalid/directory');
     }
 
     public function testInspectCannotDetect()
     {
-        $inspect = Toolstack::instance()->inspect('tests/resources/empty');
+        $inspect = Toolstack::inspect('tests/resources/empty');
         $this->assertNull($inspect);
     }
 }

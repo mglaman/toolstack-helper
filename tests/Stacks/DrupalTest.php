@@ -17,18 +17,6 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
     protected $dir = 'tests/resources/drupal';
 
     /**
-     * @var Toolstack
-     */
-    protected $toolsstack;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->toolsstack = Toolstack::instance();
-    }
-
-
-    /**
      * @return array
      */
     public function getTestDirs()
@@ -52,7 +40,7 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
     {
         // Test core
         foreach ($this->getTestDirs() as $testDir) {
-            $type = $this->toolsstack->inspect($testDir);
+            $type = Toolstack::inspect($testDir);
             $this->assertEquals(Stacks\Drupal::TYPE, $type, "$testDir is a Drupal project");
         }
     }
@@ -60,14 +48,14 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
     public function testType()
     {
         /** @var Stacks\Drupal $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Drupal::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Drupal::TYPE);
         $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
     }
 
     public function testBuilt()
     {
         /** @var Stacks\Drupal $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Drupal::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Drupal::TYPE);
 
         $this->assertTrue($stack->built($this->dir . '/core'));
         $this->assertFalse($stack->built($this->dir . '/empty'));

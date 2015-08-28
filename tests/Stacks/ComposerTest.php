@@ -17,31 +17,20 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     protected $dir = 'tests/resources/composer';
 
     /**
-     * @var Toolstack
-     */
-    protected $toolsstack;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->toolsstack = Toolstack::instance();
-    }
-
-    /**
      * @covers \mglaman\Toolstack\Toolstack::inspect()
      * @covers \mglaman\Toolstack\Stacks\Composer::inspect()
      * @covers \mglaman\Toolstack\Stacks\Composer::type()
      */
     public function testInspect()
     {
-        $type = $this->toolsstack->inspect($this->dir);
+        $type = Toolstack::inspect($this->dir);
         $this->assertEquals(Stacks\Composer::TYPE, $type, 'Directory is a composer project');
     }
 
     public function testType()
     {
         /** @var Stacks\Composer $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $this->assertEquals($stack->type(), Stacks\Composer::TYPE);
     }
 
@@ -52,7 +41,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testInstalled()
     {
         /** @var Stacks\Composer $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $bool = $stack->installed($this->dir);
         $this->assertTrue($bool, 'Composer project is installed');
     }
@@ -64,7 +53,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     {
         $path = $this->dir . '/composer.json';
         /** @var Stacks\Composer $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $this->assertEquals($path, $stack->composerFilePath($this->dir));
     }
 
@@ -75,7 +64,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     {
         $path = $this->dir . '/composer.lock';
         /** @var Stacks\Composer $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $this->assertEquals($path, $stack->composerLockPath($this->dir));
     }
 
@@ -85,7 +74,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testComposerData()
     {
         /** @var Stacks\Composer $stack */
-        $stack = $this->toolsstack->getStackByType(Stacks\Composer::TYPE);
+        $stack = Toolstack::getStackByType(Stacks\Composer::TYPE);
         $data = $stack->getComposerData($this->dir);
 
         $this->assertEquals([
