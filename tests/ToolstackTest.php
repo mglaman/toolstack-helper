@@ -19,9 +19,6 @@ use mglaman\Toolstack\Stacks;
 class ToolstackTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @covers \mglaman\Toolstack\Toolstack::loadStacks()
-     */
     public function testGetStacks()
     {
         $stacks = Toolstack::getStacks();
