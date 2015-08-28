@@ -4,12 +4,14 @@ namespace mglaman\Toolstack\Stacks;
 
 class Symfony extends Composer
 {
+    const TYPE = 'symfony';
+
     /**
      * {@inheritdoc}
      */
     public function type()
     {
-        return 'symfony';
+        return self::TYPE;
     }
 
     /**
