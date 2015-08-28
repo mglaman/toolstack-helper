@@ -63,4 +63,13 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
         $stack = $this->toolsstack->getStackByType(Stacks\Drupal::TYPE);
         $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
     }
+
+    public function testBuilt()
+    {
+        /** @var Stacks\Drupal $stack */
+        $stack = $this->toolsstack->getStackByType(Stacks\Drupal::TYPE);
+
+        $this->assertTrue($stack->built($this->dir . '/core'));
+        $this->assertFalse($stack->built($this->dir . '/empty'));
+    }
 }

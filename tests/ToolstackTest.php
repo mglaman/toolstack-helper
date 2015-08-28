@@ -19,9 +19,6 @@ use mglaman\Toolstack\Stacks;
 class ToolstackTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @covers \mglaman\Toolstack\Toolstack::instance()
-     */
     public function testSingletonInstance()
     {
         $singleton = Toolstack::instance()->instance();
@@ -30,7 +27,7 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \mglaman\Toolstack\Toolstack::getStacks()
+     * @covers \mglaman\Toolstack\Toolstack::loadStacks()
      */
     public function testGetStacks()
     {
@@ -43,5 +40,22 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
         // @todo this should probably be mocked for proper unit testing.
         $stack = Toolstack::instance()->getStackByType(Stacks\Composer::TYPE);
         $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
+
+        $stack = Toolstack::instance()->getStackByType('SomeRandomey');
+        $this->assertNull($stack);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
+     */
+    public function testInspectBadDir()
+    {
+        Toolstack::instance()->inspect('invalid/directory');
+    }
+
+    public function testInspectCannotDetect()
+    {
+        $inspect = Toolstack::instance()->inspect('tests/resources/empty');
+        $this->assertNull($inspect);
     }
 }

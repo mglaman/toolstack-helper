@@ -69,7 +69,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \mglaman\Toolstack\Stacks\Composer::composerFilePath()
+     * @covers \mglaman\Toolstack\Stacks\Composer::composerLockPath()
      */
     public function testComposerLockPath()
     {
