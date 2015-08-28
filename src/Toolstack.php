@@ -89,6 +89,17 @@ class Toolstack
     }
 
     /**
+     * Returns a stack by directory.
+     * @param $dir
+     *
+     * @return \mglaman\Toolstack\Stacks\StacksInterface|null
+     */
+    public function getStackByDir($dir)
+    {
+        return $this->getStackByType($this->inspect($dir));
+    }
+
+    /**
      * Inspects directory with stacks.
      *
      * @param $dir
