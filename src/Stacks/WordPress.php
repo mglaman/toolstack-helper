@@ -20,8 +20,7 @@ class WordPress extends StacksBase
     public function inspect($dir)
     {
         return $this->fs->exists([
-            $dir . '/index.php',
-            $dir . '/wp-config.php',
+            $dir . '/wp-load.php',
         ]);
     }
 

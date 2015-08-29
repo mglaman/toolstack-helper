@@ -32,7 +32,7 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
 
         $stack = Toolstack::getStackByType('SomeRandomey');
-        $this->assertNull($stack);
+        $this->assertNull($stack->type());
     }
 
     public function testGetStackByDir()
@@ -41,7 +41,7 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
 
         $stack = Toolstack::getStackByDir('tests/resources/empty');
-        $this->assertNull($stack);
+        $this->assertNull($stack->type());
     }
 
     /**

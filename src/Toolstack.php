@@ -30,7 +30,7 @@ class Toolstack
      *
      * @param $type
      *
-     * @return \mglaman\Toolstack\Stacks\StacksInterface|null
+     * @return \mglaman\Toolstack\Stacks\StacksInterface
      */
     public static function getStackByType($type)
     {
@@ -39,7 +39,7 @@ class Toolstack
                 return $stack;
             }
         }
-        return null;
+        return new Stacks\NullStack();
     }
 
     /**
