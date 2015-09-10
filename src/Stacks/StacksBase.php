@@ -2,6 +2,7 @@
 
 namespace mglaman\Toolstack\Stacks;
 
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
 abstract class StacksBase implements StacksInterface
@@ -19,11 +20,7 @@ abstract class StacksBase implements StacksInterface
     }
 
     /**
-     * Checks if a given type matches this stack.
-     *
-     * @param $type
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isType($type)
     {

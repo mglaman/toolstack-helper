@@ -7,6 +7,8 @@ use Symfony\Component\Finder\Finder;
 class Drupal extends StacksBase
 {
     const TYPE = 'drupal';
+    const DRUPAL7 = '7.x';
+    const DRUPAL8 = '8.x';
 
     /**
      * {@inheritdoc}
@@ -30,7 +32,7 @@ class Drupal extends StacksBase
     }
 
     /**
-     * Return Finder with all makesfiles in directory.
+     * Return Finder with all makefiles in directory.
      *
      * @param $dir
      *
@@ -86,5 +88,31 @@ class Drupal extends StacksBase
             }
         }
         return false;
+    }
+
+    /**
+     * Determine the Drupal version (make sources or built.)
+     *
+     * @param $dir
+     * @return null|string
+     */
+    public function version($dir) {
+        if ($this->source($dir)) {
+            // Check if unbuilt Drupal
+            foreach ($this->getMakefiles($dir) as $file) {
+                $f = fopen($file, 'r');
+                $peek = fread($f, 1000);
+                fclose($f);
+                foreach (explode(PHP_EOL, $peek) as $line) {
+                    preg_match("/core\s*(:|=)\s*\"?(\d.\w?)\"?$/", $line, $output_array);
+                    if (!empty($output_array)) {
+                        return ($output_array[2] == self::DRUPAL7) ? self::DRUPAL7 : self::DRUPAL8;
+                    }
+                }
+            }
+        } elseif ($this->built($dir)) {
+            return (file_exists($dir . '/composer.json')) ? self::DRUPAL8 : self::DRUPAL7;
+        }
+        return null;
     }
 }

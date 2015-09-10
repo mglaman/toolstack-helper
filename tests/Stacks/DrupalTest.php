@@ -22,7 +22,8 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
     public function getTestDirs()
     {
         return [
-          $this->dir . '/core',
+          $this->dir . '/d7',
+          $this->dir . '/d8',
           $this->dir . '/make',
           $this->dir . '/make-yml'
         ];
@@ -49,7 +50,37 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
         /** @var Stacks\Drupal $stack */
         $stack = Toolstack::getStackByType(Stacks\Drupal::TYPE);
 
-        $this->assertTrue($stack->built($this->dir . '/core'));
+        $this->assertTrue($stack->built($this->dir . '/d7'));
         $this->assertFalse($stack->built($this->dir . '/empty'));
+    }
+
+    public function testDrupal8()
+    {
+        $dir = $this->dir . '/d8';
+        /** @var Stacks\Drupal $stack */
+        $stack = Toolstack::inspect($dir);
+        $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
+        $this->assertEquals($stack->version($dir), Stacks\Drupal::DRUPAL8);
+
+        $dir = $this->dir . '/make-yml';
+        /** @var Stacks\Drupal $stack */
+        $stack = Toolstack::inspect($dir);
+        $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
+        $this->assertEquals($stack->version($dir), Stacks\Drupal::DRUPAL8);
+    }
+
+    public function testDrupal7()
+    {
+        $dir = $this->dir . '/d7';
+        /** @var Stacks\Drupal $stack */
+        $stack = Toolstack::inspect($dir);
+        $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
+        $this->assertEquals($stack->version($dir), Stacks\Drupal::DRUPAL7);
+
+        $dir = $this->dir . '/make';
+        /** @var Stacks\Drupal $stack */
+        $stack = Toolstack::inspect($dir);
+        $this->assertEquals($stack->type(), Stacks\Drupal::TYPE);
+        $this->assertEquals($stack->version($dir), Stacks\Drupal::DRUPAL7);
     }
 }
