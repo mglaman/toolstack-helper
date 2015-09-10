@@ -8,19 +8,11 @@
 
 namespace mglaman\Toolstack\Tests\Stacks;
 
-use mglaman\Toolstack\Toolstack;
-
 abstract class StackBaseTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Toolstack
-     */
-    protected $toolsstack;
-
     protected function setUp()
     {
         parent::setUp();
-        $this->toolsstack = Toolstack::instance();
     }
 
 }

@@ -23,8 +23,8 @@ class SymfonyTest extends \PHPUnit_Framework_TestCase
      */
     public function testInspect()
     {
-        $type = Toolstack::inspect($this->dir);
-        $this->assertEquals(Stacks\Symfony::TYPE, $type, 'Directory is a Symfony project');
+        $stack = Toolstack::inspect($this->dir);
+        $this->assertEquals(Stacks\Symfony::TYPE, $stack->type(), 'Directory is a Symfony project');
     }
 
     public function testType()

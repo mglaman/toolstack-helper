@@ -35,15 +35,6 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($stack->type());
     }
 
-    public function testGetStackByDir()
-    {
-        $stack = Toolstack::getStackByDir('tests/resources/composer');
-        $this->assertInstanceOf('\mglaman\Toolstack\Stacks\StacksInterface', $stack);
-
-        $stack = Toolstack::getStackByDir('tests/resources/empty');
-        $this->assertNull($stack->type());
-    }
-
     /**
      * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
      */
@@ -55,6 +46,6 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
     public function testInspectCannotDetect()
     {
         $inspect = Toolstack::inspect('tests/resources/empty');
-        $this->assertNull($inspect);
+        $this->assertNull($inspect->type());
     }
 }

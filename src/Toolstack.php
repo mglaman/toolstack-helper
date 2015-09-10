@@ -43,37 +43,25 @@ class Toolstack
     }
 
     /**
-     * Returns a stack by directory.
-     * @param $dir
-     *
-     * @return \mglaman\Toolstack\Stacks\StacksInterface|null
-     */
-    public static function getStackByDir($dir)
-    {
-        return self::getStackByType(self::inspect($dir));
-    }
-
-    /**
      * Inspects directory with stacks.
      *
      * @param $dir
      *
-     * @return null|string
+     * @return \mglaman\Toolstack\Stacks\StacksInterface
      */
     public static function inspect($dir)
     {
-        $fs = new Filesystem();
-        if (!$fs->exists($dir)) {
+        if (!is_dir($dir)) {
             throw new FileNotFoundException('Directory does not exist');
         }
 
         foreach (self::getStacks() as $stack) {
             if ($stack->inspect($dir) === true) {
-                return $stack->type();
+                return $stack;
             }
         }
 
         // Stacks were not able to identify the structure.
-        return null;
+        return new Stacks\NullStack();
     }
 }

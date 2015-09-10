@@ -28,20 +28,12 @@ class DrupalTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @covers \mglaman\Toolstack\Toolstack::inspect()
-     * @covers \mglaman\Toolstack\Stacks\Drupal::inspect()
-     * @covers \mglaman\Toolstack\Stacks\Drupal::type()
-     * @covers \mglaman\Toolstack\Stacks\Drupal::source()
-     * @covers \mglaman\Toolstack\Stacks\Drupal::getMakefiles()
-     * @covers \mglaman\Toolstack\Stacks\Drupal::built()
-     */
     public function testInspect()
     {
         // Test core
         foreach ($this->getTestDirs() as $testDir) {
-            $type = Toolstack::inspect($testDir);
-            $this->assertEquals(Stacks\Drupal::TYPE, $type, "$testDir is a Drupal project");
+            $stack = Toolstack::inspect($testDir);
+            $this->assertEquals(Stacks\Drupal::TYPE, $stack->type(), "$testDir is a Drupal project");
         }
     }
 

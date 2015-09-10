@@ -16,15 +16,10 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 {
     protected $dir = 'tests/resources/composer';
 
-    /**
-     * @covers \mglaman\Toolstack\Toolstack::inspect()
-     * @covers \mglaman\Toolstack\Stacks\Composer::inspect()
-     * @covers \mglaman\Toolstack\Stacks\Composer::type()
-     */
     public function testInspect()
     {
-        $type = Toolstack::inspect($this->dir);
-        $this->assertEquals(Stacks\Composer::TYPE, $type, 'Directory is a composer project');
+        $stack = Toolstack::inspect($this->dir);
+        $this->assertEquals(Stacks\Composer::TYPE, $stack->type(), 'Directory is a composer project');
     }
 
     public function testType()
