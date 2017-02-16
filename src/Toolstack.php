@@ -52,7 +52,7 @@ class Toolstack
     public static function inspect($dir)
     {
         if (!is_dir($dir)) {
-            throw new FileNotFoundException('Directory does not exist');
+            throw new FileNotFoundException(sprintf('Directory "%s" does not exist.', $dir));
         }
 
         foreach (self::getStacks() as $stack) {
