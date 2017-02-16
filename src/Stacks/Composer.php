@@ -12,7 +12,7 @@ class Composer extends StacksBase
      */
     public function type()
     {
-        return self::TYPE;
+        return static::TYPE;
     }
 
     /**

@@ -9,14 +9,6 @@ class Symfony extends Composer
     /**
      * {@inheritdoc}
      */
-    public function type()
-    {
-        return self::TYPE;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function inspect($dir)
     {
         if (parent::inspect($dir)) {
