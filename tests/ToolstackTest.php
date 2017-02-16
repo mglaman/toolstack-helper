@@ -37,6 +37,7 @@ class ToolstackTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
+     * @expectedExceptionMessageRegExp /Directory ".*invalid\/directory" does not exist./
      */
     public function testInspectBadDir()
     {
