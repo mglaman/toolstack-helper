@@ -2,7 +2,6 @@
     "name": "mglaman/toolstack-helper",
     "description": "Helps identify what kind of project is in a folder (Drupal, WordPress, Symfonfy, etc.)",
     "require": {
-        "symfony/process": "^2.7|^3.0",
         "symfony/finder": "^2.7|^3.0",
         "symfony/filesystem": "^2.7|^3.0"
     },
