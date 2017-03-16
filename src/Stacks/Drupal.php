@@ -111,7 +111,7 @@ class Drupal extends StacksBase
                 }
             }
         } elseif ($this->built($dir)) {
-            return (file_exists($dir . '/composer.json')) ? self::DRUPAL8 : self::DRUPAL7;
+            return (file_exists($dir . '/core/composer.json')) ? self::DRUPAL8 : self::DRUPAL7;
         }
         return null;
     }
